@@ -803,6 +803,12 @@ export default class SearchLightExt extends Extension {
     }
   }
 
+  _clearCurrentQuery() {
+    this._setCurrentQuery('');
+    this._queryHistoryIndex = -1;
+    this._search?.show();
+  }
+
   _cycleQueryHistory(step) {
     if (!this._queryHistory.length) {
       return false;
@@ -1124,6 +1130,10 @@ export default class SearchLightExt extends Extension {
     const entryFocused = !!(focus && this._entry.contains(focus));
 
     if (entryFocused && (state & Clutter.ModifierType.CONTROL_MASK)) {
+      if (symbol === Clutter.KEY_l || symbol === Clutter.KEY_L) {
+        this._clearCurrentQuery();
+        return Clutter.EVENT_STOP;
+      }
       if (symbol === Clutter.KEY_Up && this._cycleQueryHistory(1)) {
         return Clutter.EVENT_STOP;
       }
