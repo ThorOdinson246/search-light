@@ -56,6 +56,14 @@ $ make
 Ctrl+Cmd+Space (change at the preference page)
 Cmd - your Windows logo, or the command logo on mac. Linux also calls this the 'Super' key.
 
+### Search UX Shortcuts
+
+* Query is preserved when Search Light is dismissed and restored on next open.
+* `Ctrl+Up` / `Ctrl+Down` cycles through recent search queries.
+* `Ctrl+L` clears the current query without closing Search Light.
+* `Shift+Escape` clears the current query in place.
+* `Tab` restores your last query when the field is empty.
+
 ### Credits
 
 Original project: https://github.com/icedman/search-light by icedman.
