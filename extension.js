@@ -1165,9 +1165,10 @@ export default class SearchLightExt extends Extension {
         return Clutter.EVENT_STOP;
       }
       this._search._text.get_parent().grab_key_focus();
+      return Clutter.EVENT_STOP;
     }
 
-    return Clutter.EVENT_STOP;
+    return Clutter.EVENT_PROPAGATE;
   }
 
   _onFullScreen() {
