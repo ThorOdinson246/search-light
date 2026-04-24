@@ -498,6 +498,7 @@ export default class SearchLightExt extends Extension {
     }
 
     this._saveCurrentQuery();
+    this._pushQueryHistory(this._lastQuery);
     this._release_ui();
     this._remove_events();
 
@@ -721,6 +722,8 @@ export default class SearchLightExt extends Extension {
     }
     this._searchResults.activateDefault = () => {
       // hide window immediately when activated
+      this._saveCurrentQuery();
+      this._pushQueryHistory(this._lastQuery);
       this.mainContainer.opacity = 0;
       this._searchResults._activateDefault();
     };
@@ -808,11 +811,7 @@ export default class SearchLightExt extends Extension {
       return;
     }
 
-    this._search._text.set_text(this._lastQuery);
-    if (this._entry && this._entry.clutter_text) {
-      this._entry.clutter_text.set_cursor_position(-1);
-      this._entry.clutter_text.set_selection(0, 0);
-    }
+    this._setCurrentQuery(this._lastQuery);
   }
 
   _release_ui() {
