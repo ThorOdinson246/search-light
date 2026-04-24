@@ -9,14 +9,15 @@
   </p>
 </p>
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/icedman)
-
-![Contributors](https://img.shields.io/github/contributors/icedman/search-light?color=dark-green) ![Forks](https://img.shields.io/github/forks/icedman/search-light?style=social) ![Stargazers](https://img.shields.io/github/stars/icedman/search-light?style=social) ![Issues](https://img.shields.io/github/issues/icedman/search-light) ![License](https://img.shields.io/github/license/icedman/search-light) 
-
 ![First Release](https://raw.githubusercontent.com/icedman/search-light/main/screenshots/Screenshot%20from%202022-11-03%2011-53-28.png)
 
 
 This is a Gnome Shell extension that takes the apps search widget out of Overview. Like the macOS spotlight, or Alfred.
+
+### Fork Status
+
+This repository is my personal forked working version of Search Light.
+I am actively building my own tweaks, quality-of-life improvements, and bug fixes on top of the original project.
 
 ### Notice
 

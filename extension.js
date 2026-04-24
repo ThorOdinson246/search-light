@@ -61,6 +61,7 @@ export default class SearchLightExt extends Extension {
     Main.overview.graphene = Graphene;
     
     this._style = new Style();
+    this._lastQuery = '';
 
     this._hiTimer = new Timer('hi-res timer');
     this._hiTimer.initialize(15);
@@ -444,6 +445,7 @@ export default class SearchLightExt extends Extension {
       this._animSeq = null;
     }
     this._acquire_ui();
+    this._restoreLastQuery();
 
     if (this._bgActor) {
       let bgSource = Main.layoutManager._backgroundGroup.get_child_at_index(0);
@@ -492,6 +494,7 @@ export default class SearchLightExt extends Extension {
       return;
     }
 
+    this._saveCurrentQuery();
     this._release_ui();
     this._remove_events();
 
@@ -735,6 +738,7 @@ export default class SearchLightExt extends Extension {
     this._textChangedEventId = this._search._text.connect(
       'text-changed',
       () => {
+        this._saveCurrentQuery();
         this.container.set_size(this.width, this.height);
         this.mainContainer.set_size(this.width, this.height);
         if (this._corners) {
@@ -747,6 +751,28 @@ export default class SearchLightExt extends Extension {
     );
 
     this._search._text.get_parent().grab_key_focus();
+  }
+
+  _saveCurrentQuery() {
+    if (!this._search || !this._search._text || !this._search._text.get_text) {
+      return;
+    }
+    this._lastQuery = this._search._text.get_text() || '';
+  }
+
+  _restoreLastQuery() {
+    if (!this._search || !this._search._text || !this._search._text.set_text) {
+      return;
+    }
+    if (!this._lastQuery) {
+      return;
+    }
+
+    this._search._text.set_text(this._lastQuery);
+    if (this._entry && this._entry.clutter_text) {
+      this._entry.clutter_text.set_cursor_position(-1);
+      this._entry.clutter_text.set_selection(0, 0);
+    }
   }
 
   _release_ui() {
