@@ -1,5 +1,14 @@
 ## ROADMAP
 
+## fork updates
+
+* preserve query when dismissing Search Light and restore on reopen
+* add recent query recall with Ctrl+Up and Ctrl+Down
+* add Ctrl+L to clear query without closing the popup
+* add Shift+Escape to clear query in place
+* add Tab shortcut to restore last query when search is empty
+* improve key event propagation for focused search entry
+
 ## release 38
 
 * fork gnome 48 from 47
