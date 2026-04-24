@@ -1151,6 +1151,14 @@ export default class SearchLightExt extends Extension {
       return Clutter.EVENT_STOP;
     }
 
+    if (entryFocused && symbol === Clutter.KEY_Tab) {
+      if (!this._normalizeQuery(this._getCurrentQuery()) && this._lastQuery) {
+        this._setCurrentQuery(this._lastQuery);
+        this._search?.show();
+        return Clutter.EVENT_STOP;
+      }
+    }
+
     if (!focus || !this._entry.contains(focus)) {
       if (symbol === Clutter.KEY_Escape) {
         this.hide();
