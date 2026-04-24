@@ -9,7 +9,7 @@
   </p>
 </p>
 
-![First Release](https://raw.githubusercontent.com/icedman/search-light/main/screenshots/Screenshot%20from%202022-11-03%2011-53-28.png)
+![First Release](screenshots/Screenshot%20from%202022-11-03%2011-53-28.png)
 
 
 This is a Gnome Shell extension that takes the apps search widget out of Overview. Like the macOS spotlight, or Alfred.
@@ -43,17 +43,13 @@ Blurred background feature requires **imagemagick** to be installed in the syste
 Manual Installation: 
 - Clone this repo
 ```bash
-$ git clone https://github.com/icedman/search-light
+$ git clone https://github.com/ThorOdinson246/search-light
 ```
 - Use the `Makefile` to build and install
 ```bash 
 $ cd search-light
 $ make
 ```
-
-From Gnome Extensions Repository
-
-Visit [repository](https://extensions.gnome.org/extension/5489/search-light/)
 
 ### Keybinding
 

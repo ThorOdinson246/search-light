@@ -241,15 +241,15 @@ app.connect('activate', (me) => {
   const actions = [
     {
       name: 'open-bug-report',
-      link: 'https://github.com/icedman/dash2dock-lite/issues',
+      link: 'https://github.com/ThorOdinson246/search-light/issues',
     },
     {
       name: 'open-readme',
-      link: 'https://github.com/icedman/dash2dock-lite',
+      link: 'https://github.com/ThorOdinson246/search-light',
     },
     {
       name: 'open-license',
-      link: 'https://github.com/icedman/dash2dock-lite/blob/master/LICENSE',
+      link: 'https://github.com/ThorOdinson246/search-light/blob/main/LICENSE',
     },
   ];
 
