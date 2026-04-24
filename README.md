@@ -58,4 +58,6 @@ Cmd - your Windows logo, or the command logo on mac. Linux also calls this the '
 
 ### Credits
 
+Original project: https://github.com/icedman/search-light by icedman.
+This repository builds on that work with my own fixes and tweaks.
 Blur-My-Shell for background blurring code.
