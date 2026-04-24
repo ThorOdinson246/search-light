@@ -803,6 +803,33 @@ export default class SearchLightExt extends Extension {
     }
   }
 
+  _cycleQueryHistory(step) {
+    if (!this._queryHistory.length) {
+      return false;
+    }
+
+    let nextIndex = this._queryHistoryIndex;
+    if (nextIndex === -1) {
+      if (step < 0) {
+        return false;
+      }
+      nextIndex = 0;
+    } else {
+      nextIndex += step;
+    }
+
+    nextIndex = Math.max(0, Math.min(nextIndex, this._queryHistory.length - 1));
+
+    if (nextIndex === this._queryHistoryIndex) {
+      return false;
+    }
+
+    this._queryHistoryIndex = nextIndex;
+    this._setCurrentQuery(this._queryHistory[this._queryHistoryIndex]);
+    this._search?.show();
+    return true;
+  }
+
   _restoreLastQuery() {
     if (!this._search || !this._search._text || !this._search._text.set_text) {
       return;
@@ -1091,9 +1118,22 @@ export default class SearchLightExt extends Extension {
 
   _onKeyPressed(obj, evt) {
     if (!this._entry) return;
+    const symbol = evt.get_key_symbol();
+    const state = evt.get_state ? evt.get_state() : 0;
     let focus = global.stage.get_key_focus();
+    const entryFocused = !!(focus && this._entry.contains(focus));
+
+    if (entryFocused && (state & Clutter.ModifierType.CONTROL_MASK)) {
+      if (symbol === Clutter.KEY_Up && this._cycleQueryHistory(1)) {
+        return Clutter.EVENT_STOP;
+      }
+      if (symbol === Clutter.KEY_Down && this._cycleQueryHistory(-1)) {
+        return Clutter.EVENT_STOP;
+      }
+    }
+
     if (!focus || !this._entry.contains(focus)) {
-      if (evt.get_key_symbol() === Clutter.KEY_Escape) {
+      if (symbol === Clutter.KEY_Escape) {
         this.hide();
         return Clutter.EVENT_STOP;
       }
