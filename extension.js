@@ -62,6 +62,9 @@ export default class SearchLightExt extends Extension {
     
     this._style = new Style();
     this._lastQuery = '';
+    this._queryHistory = [];
+    this._queryHistoryIndex = -1;
+    this._maxQueryHistory = 25;
 
     this._hiTimer = new Timer('hi-res timer');
     this._hiTimer.initialize(15);
@@ -758,6 +761,43 @@ export default class SearchLightExt extends Extension {
       return;
     }
     this._lastQuery = this._search._text.get_text() || '';
+  }
+
+  _normalizeQuery(query) {
+    return (query || '').trim();
+  }
+
+  _pushQueryHistory(query) {
+    const normalized = this._normalizeQuery(query);
+    if (!normalized) {
+      this._queryHistoryIndex = -1;
+      return;
+    }
+
+    this._queryHistory = this._queryHistory.filter((item) => item !== normalized);
+    this._queryHistory.unshift(normalized);
+    this._queryHistory = this._queryHistory.slice(0, this._maxQueryHistory);
+    this._queryHistoryIndex = -1;
+  }
+
+  _getCurrentQuery() {
+    if (!this._search || !this._search._text || !this._search._text.get_text) {
+      return '';
+    }
+
+    return this._search._text.get_text() || '';
+  }
+
+  _setCurrentQuery(query) {
+    if (!this._search || !this._search._text || !this._search._text.set_text) {
+      return;
+    }
+
+    this._search._text.set_text(query || '');
+    if (this._entry && this._entry.clutter_text) {
+      this._entry.clutter_text.set_cursor_position(-1);
+      this._entry.clutter_text.set_selection(0, 0);
+    }
   }
 
   _restoreLastQuery() {
